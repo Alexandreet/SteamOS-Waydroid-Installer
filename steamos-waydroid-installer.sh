@@ -203,7 +203,6 @@ else
 		--column="Description - Read this carefully!"\
 		TRUE A13_GAPPS "Download official Android 13 image with Google Play Store."\
 		FALSE A13_NO_GAPPS "Download official Android 13 image without Google Play Store."\
-		FALSE A13_CUSTOM "Download unofficial Android 13 that has new implementation of fake wifi."\
 		FALSE TV13_GAPPS "Download unofficial Android 13 TV image with Google Play Store - thanks SupeChicken666 for the image!" \
 		FALSE TV13_NO_GAPPS "Download unofficial Android 13 TV image without Google Play Store - thanks SupeChicken666 for the image!" \
 		FALSE EXIT "***** Exit this script *****")
@@ -236,14 +235,6 @@ else
 			echo Initializing Waydroid.
  			echo -e "$current_password\n" | sudo -S waydroid init -c ${ANDROID13_TV_OTA}/system -v ${ANDROID13_TV_OTA}/vendor
 			check_waydroid_init
-
-		elif [ "$Android_Choice" == "A13_CUSTOM" ]
-		then
-			prepare_custom_image_location
-			download_image $ANDROID13_IMG $ANDROID13_IMG_HASH /var/lib/waydroid/custom "Android 13 Custom Image"
-			echo Initializing Waydroid.
-			echo -e "$current_password\n" | sudo -S waydroid init
-			check_waydroid_init
 		fi
 
 	# run casualsnek / aleasto waydroid_script
@@ -252,10 +243,6 @@ else
 	then
 		echo No need for casualsnek / aleasto waydroid_script for TV13 images.
 		echo TV13 images already contains libhoudini arm translation layer and widevine.
-
-	elif [ "$Android_Choice" == "A13_CUSTOM" ]
-	then
-		install_android_extras_custom
 	else
 		install_android_extras
 	fi
