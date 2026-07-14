@@ -123,21 +123,47 @@ chmod +x ~/.local/share/kio/servicemenus/open_as_root.desktop
 ln -s ~/Android_Waydroid/Waydroid-Toolbox.sh ~/Desktop/Waydroid-Toolbox &> /dev/null
 ln -s ~/Android_Waydroid/Waydroid-Updater.sh ~/Desktop/Waydroid-Updater &> /dev/null
 
-# prepare and mount custom /var/lib/waydroid
-echo Creating custom /var/lib/waydroid this can take a while.
-echo -e "$current_password\n" | sudo -S mkdir -p /var/lib/waydroid
-mount_waydroid_var
-
-if [ $? -eq 0 ]
-then
-	echo Custom /var/lib/waydroid has been created and mounted!
-else
-	echo Error creating /var/lib/waydroid. Exiting immediately.
-	cleanup_exit
-fi
 
 # lets check if this is a reinstall
-echo Checking if this is a reinstall.
+echo Checking if this is a reinstall - step1.
+if [ -d /var/lib/waydroid ]
+then
+	echo /var/lib/waydroid exists! 
+else
+	sudo -S mkdir /var/lib/waydroid
+fi
+
+echo Checking if this is a reinstall - step2.
+if [ -f $HOME/Android_Waydroid/waydroid.img ]
+then
+	echo Most probably this is a reinstall!
+	echo Mounting waydroid.img to /var/lib/waydroid
+	ROOTDEV=$(sudo losetup --find --show $HOME/Android_Waydroid/waydroid.img) && sudo mount $ROOTDEV /var/lib/waydroid
+
+	if [ $? -eq 0 ]
+	then
+		echo waydroid.img successfully mounted to /var/lib/waydroid
+	else
+		echo Error mounting waydroid.img
+		echo Exiting immediately.
+		cleanup_exit
+	fi
+
+else
+	echo waydroid.img not found!
+	echo Preparing to mount waydroid.img
+	mount_waydroid_var
+
+	if [ $? -eq 0 ]
+	then
+		echo Custom /var/lib/waydroid has been created and mounted!
+	else
+		echo Error creating /var/lib/waydroid. Exiting immediately.
+		cleanup_exit
+	fi
+fi
+
+echo Checking if this is a reinstall - step3.
 grep blazer /var/lib/waydroid/waydroid_base.prop &> /dev/null || grep PH7M_EU_5596 /var/lib/waydroid/waydroid_base.prop &> /dev/null
 if [ $? -eq 0 ]
 then

@@ -45,7 +45,7 @@ cleanup_exit () {
 	rm ~/Desktop/Waydroid-Toolbox &> /dev/null
 
 	# delete Android_Waydroid folder and enable the readonly
-	echo -e "$current_password\n" | sudo -S rm -rf ~/Android_Waydroid &> /dev/null
+	echo -e "$current_password\n" | sudo -S rm -rf ~/Android_Waydroid/*.sh ~/Android_Waydroid{config,pacman} &> /dev/null
 	echo -e "$current_password\n" | sudo -S steamos-readonly enable &> /dev/null
 	
 	# re-enable Decky Loader Plugin Loader service
