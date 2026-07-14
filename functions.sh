@@ -97,7 +97,7 @@ apply_android_custom_config () {
 	cat extras/props/waydroid_base.prop | sudo tee -a /var/lib/waydroid/waydroid_base.prop > /dev/null
 
 	# waydroid_base.prop fingerprint spoof - check if A11 or A13 and apply the spoof accordingly
-	if [ "$Android_Choice" == "A13_NO_GAPPS" ] || [ "$Android_Choice" == "A13_GAPPS" ] || [ "$Android_Choice" == "A13_CUSTOM" ]
+	if [ "$Android_Choice" == "A13_NO_GAPPS" ] || [ "$Android_Choice" == "A13_GAPPS" ]
 	then
 		echo "" | sudo tee -a /var/lib/waydroid/waydroid_base.prop > /dev/null
 		cat extras/props/android_spoof.prop | sudo tee -a /var/lib/waydroid/waydroid_base.prop > /dev/null
