@@ -7,28 +7,16 @@ echo https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer
 echo YT - 10MinuteSteamDeckGamer
 sleep 2
 
-echo Due to AUR malware insecurities, the author has decided to temporarily disable this script.
-echo If you still want to run this script - delete line 16 and run the script again!
-echo Take note that if you are on SteamOS 3.8.x this will break Desktop Mode.
-echo Please wait for the author to update the script to fully work in SteamOS 3.8.x.
-echo Thank you and happy gaming!
-echo ~10MinuteSteamDeckGamer
-exit
-
 # define variables here
 SCRIPT_VERSION_SHA=$(git rev-parse --short HEAD)
 STEAMOS_VERSION=$(cat /etc/os-release | grep -i version_id | cut -d "=" -f2 | cut -d "." -f1-2)
-BASE_VERSION=3.7
+BASE_VERSION=3.8
 STEAMOS_BRANCH=$(steamos-select-branch -c)
 WORKING_DIR=$(pwd)
 LOGFILE=$WORKING_DIR/logfile
-BINDER_AUR=https://aur.archlinux.org/binder_linux-dkms.git
-BINDER_GITHUB=https://github.com/archlinux/aur.git
-BINDER_DIR=$(mktemp -d)/aur_binder
 WAYDROID_SCRIPT=https://github.com/casualsnek/waydroid_script.git
 WAYDROID_SCRIPT_DIR=$(mktemp -d)/waydroid_script
 FREE_HOME=$(df /home --output=avail | tail -n1)
-PLUGIN_LOADER=/home/deck/homebrew/services/PluginLoader
 ARM_Choice=libhoudini
 
 # android TV builds
@@ -65,26 +53,6 @@ else
 	cleanup_exit
 fi
 
-# Clone binder
-git clone $BINDER_AUR $BINDER_DIR &> /dev/null
-if [ $? -eq 0 ]
-then
-	echo Binder AUR has been successfully cloned! Proceed to the next step.
-else
-	echo Error cloning the binder repo! Trying the binder github mirror.
-	rm -rf $BINDER_DIR
-	git clone --branch binder_linux-dkms --single-branch $BINDER_GITHUB $BINDER_DIR &> /dev/null
-
-	if [ $? -eq 0 ]
-	then
-		echo Binder has been successfully cloned! Proceed to the next step.
-	else
-		echo Error cloning the binder repo. Both AUR and github mirror failed!
-		rm -rf $BINDER_DIR
-		cleanup_exit
-	fi
-fi
-
 # unlock the readonly and initialize keyring using the devmode method
 echo Unlocking SteamOS and initializing keyring via steamos-devmode. This can take a while.
 echo "*** steamos-devmode ***" &> $LOGFILE
@@ -98,83 +66,12 @@ else
 	cleanup_exit
 fi
 
-if awk "BEGIN {exit ! ($STEAMOS_VERSION == $BASE_VERSION)}"
-then
-
-	# lets install the packages needed to build binder
-	echo Installing packages needed to build binder module from source. This can take a while.
-	echo "*** pacman install dependencies for binder ***" &>> $LOGFILE
-	echo -e "$current_password\n" | sudo -S pacman -S --noconfirm fakeroot debugedit dkms plymouth \
-	linux-neptune-$(uname -r | cut -d "-" -f5)-headers --overwrite "*" &>> $LOGFILE
-
-	if [ $? -eq 0 ]
-	then
-		echo No errors encountered installing packages needed to build binder module.
-	else
-		echo Errors were encountered.
-		echo Performing clean up. Good bye!
-		cleanup_exit
-		exit
-	fi
-
-	# finally lets build and install binder from source!
-	echo Building and installing binder module from source. This can take a while.
-	echo "*** build and install binder from source ***" &>> $LOGFILE
-	cd $BINDER_DIR && makepkg -f &>> $LOGFILE && \
-		echo -e "$current_password\n" | sudo -S pacman -U --noconfirm binder_linux-dkms*.zst &>> $LOGFILE && \
-		echo -e "$current_password\n" | sudo -S mkdir -p /usr/lib/modules/$(uname -r)/updates/dkms &>> $LOGFILE && \
-		echo -e "$current_password\n" | sudo -S cp /var/lib/dkms/binder/1/$(uname -r)/x86_64/module/binder_linux.ko.zst \
-			/usr/lib/modules/$(uname -r)/updates/dkms/ &>> $LOGFILE && \
-		echo -e "$current_password\n" | sudo -S depmod -a &>> $LOGFILE && \
-		echo -e "$current_password\n" | sudo -S modprobe binder_linux device=binder,hwbinder,vndbinder &>> $LOGFILE
-
-	if [ $? -eq 0 ]	
-	then
-		echo No errors encountered building the binder module. Binder module has been loaded.
-	else
-		echo Errors were encountered.
-		echo Performing clean up. Good bye!
-		cleanup_exit
-		exit
-	fi
-
-	# ok lets install additional packages from pacman repo
-	echo -e "$current_password\n" | sudo -S pacman -S --noconfirm wlroots cage wlr-randr &>> $LOGFILE
-
-	if [ $? -eq 0 ]
-	then
-		echo cage has been installed!
-	else
-		echo Error installing cage. Run the script again to install waydroid.
-		cleanup_exit
-	fi
-
-	# waydroid binder configuration file
-	cd $WORKING_DIR
-	echo -e "$current_password\n" | sudo -S cp extras/waydroid_binder.conf /etc/modules-load.d/waydroid_binder.conf
-	echo -e "$current_password\n" | sudo -S cp extras/options-waydroid_binder.conf /etc/modprobe.d/waydroid_binder.conf
-
-elif awk "BEGIN {exit ! ($STEAMOS_VERSION > $BASE_VERSION)}"
-then
-
-	# ok lets install additional packages from pacman repo
-	echo -e "$current_password\n" | sudo -S pacman -S --noconfirm cage wlr-randr &>> $LOGFILE
-
-	if [ $? -eq 0 ]
-	then
-		echo cage has been installed!
-	else
-		echo Error installing cage. Run the script again to install waydroid.
-		cleanup_exit
-	fi
-fi
-
 # ok lets install precompiled waydroid
 echo Installing waydroid packages. This can take a while.
 echo "*** pacman install waydroid packages ***" &>> $LOGFILE
 cd $WORKING_DIR
-echo -e "$current_password\n" | sudo -S pacman -U --noconfirm waydroid/libgbinder*.zst waydroid/libglibutil*.zst \
-	waydroid/python-gbinder*.zst waydroid/waydroid*.zst &>> $LOGFILE && \
+echo -e "$current_password\n" | sudo -S pacman -U --noconfirm extras/pacman/libgbinder*.zst extras/pacman/libglibutil*.zst \
+	extras/pacman/python-gbinder*.zst extras/pacman/waydroid*.zst &>> $LOGFILE 
 
 if [ $? -eq 0 ]
 then
@@ -195,26 +92,24 @@ echo -e "$current_password\n" | sudo -S firewall-cmd --runtime-to-permanent &> /
 echo -e "$current_password\n" | sudo -S systemctl stop firewalld
 
 # lets install the custom config files
-mkdir -p ~/Android_Waydroid/extras &> /dev/null
+mkdir -p ~/Android_Waydroid/{config,pacman} &> /dev/null
 
 # waydroid startup and shutdown scripts
-echo -e "$current_password\n" | sudo -S cp extras/waydroid-startup-scripts /usr/bin/waydroid-startup-scripts
-echo -e "$current_password\n" | sudo -S cp extras/waydroid-shutdown-scripts /usr/bin/waydroid-shutdown-scripts
-echo -e "$current_password\n" | sudo -S cp extras/waydroid-mount /usr/bin/waydroid-mount
-echo -e "$current_password\n" | sudo -S cp extras/waydroid-firewall /usr/bin/waydroid-firewall
-echo -e "$current_password\n" | sudo -S chmod +x /usr/bin/waydroid-startup-scripts /usr/bin/waydroid-shutdown-scripts /usr/bin/waydroid-mount /usr/bin/waydroid-firewall
+echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-startup-scripts /usr/bin/waydroid-startup-scripts
+echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-shutdown-scripts /usr/bin/waydroid-shutdown-scripts
+echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-mount /usr/bin/waydroid-mount
+echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-firewall /usr/bin/waydroid-firewall
+echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-install-cage /usr/bin/waydroid-install-cage
+echo -e "$current_password\n" | sudo -S chmod +x /usr/bin/waydroid-startup-scripts /usr/bin/waydroid-shutdown-scripts /usr/bin/waydroid-mount /usr/bin/waydroid-firewall /usr/bin/waydroid-install-cage
 
 # custom sudoers file do not ask for sudo for the custom waydroid scripts
 echo -e "$current_password\n" | sudo -S cp extras/zzzzzzzz-waydroid /etc/sudoers.d/zzzzzzzz-waydroid
 echo -e "$current_password\n" | sudo -S chown root:root /etc/sudoers.d/zzzzzzzz-waydroid
 
-# waydroid launcher, functions ,toolbox and updater
-cp extras/Android_Waydroid_Cage.sh \
-	extras/Waydroid-Toolbox.sh \
-	extras/Waydroid-Updater.sh \
-	extras/fake_wifi \
-	extras/fake_touch \
-	~/Android_Waydroid
+# copy waydroid launcher dependencies
+cp extras/scripts/Android_Waydroid_Cage.sh extras/scripts/Waydroid-Toolbox.sh extras/scripts/Waydroid-Updater.sh ~/Android_Waydroid
+cp extras/config/fake_wifi extras/config/fake_touch ~/Android_Waydroid/config
+cp -R extras/pacman ~/Android_Waydroid
 
 # waydroid launcher, toolbox and updater
 chmod +x ~/Android_Waydroid/*.sh
@@ -265,11 +160,11 @@ else
 	# place custom overlay files here - key layout, hosts, audio.rc etc etc
 	# copy fixed key layout for Steam Controller
 	echo -e "$current_password\n" | sudo -S mkdir -p /var/lib/waydroid/overlay/system/usr/keylayout
-	echo -e "$current_password\n" | sudo -S cp extras/Vendor_28de_Product_11ff.kl /var/lib/waydroid/overlay/system/usr/keylayout/
+	echo -e "$current_password\n" | sudo -S cp extras/fixes/Vendor_28de_Product_11ff.kl /var/lib/waydroid/overlay/system/usr/keylayout/
 
 	# copy custom audio.rc patch to lower the audio latency
 	echo -e "$current_password\n" | sudo -S mkdir -p /var/lib/waydroid/overlay/system/etc/init
-	echo -e "$current_password\n" | sudo -S cp extras/audio.rc /var/lib/waydroid/overlay/system/etc/init/
+	echo -e "$current_password\n" | sudo -S cp extras/fixes/audio.rc /var/lib/waydroid/overlay/system/etc/init/
 
 	# download custom hosts file from StevenBlack to block ads (adware + malware + fakenews + gambling + pr0n)
 	echo -e "$current_password\n" | sudo -S wget https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts \
@@ -392,13 +287,6 @@ EOF
 	echo -e "$current_password\n" | sudo systemctl stop waydroid-container.service
 	unmount_waydroid_var
 	mv extras/waydroid.img ~/Android_Waydroid/waydroid.img
-fi
-
-# restart Decky Loader if we stopped it at the beginning
-if [ "$DECKY_LOADER_STOPPED" == "true" ]
-then
-	echo Re-enabling Decky Loader Plugin Loader service.
-	echo -e "$current_password\n" | sudo -S systemctl start plugin_loader.service &> /dev/null
 fi
 
 # all done! Display dialog box for Gaming Mode
