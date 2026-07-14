@@ -11,14 +11,13 @@ else
 	exit
 fi
 
-# sanity check - make sure this is running on at least SteamOS 3.7.x
-# if awk "BEGIN {exit ! ($STEAMOS_VERSION >= $BASE_VERSION)}" - comment this out as there are issues with 3.8 onwards
+# sanity check - make sure this is running on at least SteamOS 3.8.x
 if awk "BEGIN {exit ! ($STEAMOS_VERSION >= $BASE_VERSION && $STEAMOS_VERSION <= 3.8)}"
 then
 	echo SteamOS $STEAMOS_VERSION $STEAMOS_BRANCH detected. Proceed to the next step.
 else
 	echo SteamOS $STEAMOS_VERSION $STEAMOS_BRANCH detected. This is unsupported version.
-	echo Update SteamOS and make sure it is at least on SteamOS 3.7.x.
+	echo Update SteamOS and make sure it is at least on SteamOS 3.8.x.
 	exit
 fi
 
