@@ -8,6 +8,7 @@ rm -f /home/deck/Android_Waydroid/orig_kernel.pid_max
 cage -- bash -c 'wlr-randr'
 
 # stop the waydroid container
+sleep 10
 systemctl stop waydroid-container.service
 systemctl stop firewalld.service
 
