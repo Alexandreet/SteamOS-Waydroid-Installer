@@ -2,8 +2,6 @@
 
 export RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
 
-
-
 # mount /var/lib/waydroid
 sudo /usr/bin/waydroid-mount
 
