@@ -19,5 +19,5 @@ losetup -d $(losetup | grep waydroid.img | cut -d " " -f1)
 
 # remove the offending packages
 pacman -R cage wlroots0.18 --noconfirm
-pacman -S libdisplay-info --noconfirm
+pacman -U /home/deck/Android_Waydroid/pacman/libdisplay-info-0.3.0-1-x86_64.pkg.tar.zst --noconfirm
 
