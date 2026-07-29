@@ -1,3 +1,4 @@
+ALL Credits to [ryanrudolfoba](https://github.com/ryanrudolfoba)
 # SteamOS Android Waydroid Installer
 
 A collection of tools that is packaged into an easy to use script that is streamlined and tested to work with the Steam Deck running on SteamOS.
