@@ -1,0 +1,95 @@
+*** steamos-devmode ***
+
+SteamOS Developer Mode
+
+Important: This will allow potentially breaking changes to the root filesystem.
+  This is meant for developers and technical users who know what they are doing.
+  Changes to the root filesystem will be overwritten by the next SteamOS update.
+
+Developers:
+  - Consider packaging your application with flatpak, rather than
+    invoking/requiring this script.  This is a much better (and safer) experience
+    for users
+  - Consider building your package in the Holo container images with
+    distrobox/toolbox
+
+
+;; Deleting existing pacman keyring
++ rm -rf --one-file-system /etc/pacman.d/gnupg/
+:: Initializing pacman keyring
++ pacman-key --init
+gpg: /etc/pacman.d/gnupg/trustdb.gpg: trustdb created
+gpg: no ultimately trusted keys found
+gpg: starting migration from earlier GnuPG versions
+gpg: porting secret keys from '/etc/pacman.d/gnupg/secring.gpg' to gpg-agent
+gpg: migration succeeded
+==> Generating pacman master key. This may take some time.
+gpg: Generating pacman keyring master key...
+gpg: directory '/etc/pacman.d/gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/FD2670E0BF353BE5850C7D394AB4061233F3645C.rev'
+gpg: Done
+==> Updating trust database...
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
++ pacman-key --populate
+==> Appending keys from archlinux.gpg...
+==> Appending keys from holo.gpg...
+==> Locally signing trusted keys in keyring...
+  -> Locally signed 10 keys.
+==> Importing owner trust values...
+gpg: setting ownertrust to 4
+gpg: setting ownertrust to 4
+gpg: setting ownertrust to 4
+gpg: inserting ownertrust of 4
+gpg: setting ownertrust to 4
+gpg: setting ownertrust to 4
+gpg: setting ownertrust to 4
+gpg: setting ownertrust to 4
+gpg: setting ownertrust to 4
+gpg: setting ownertrust to 4
+==> Disabling revoked keys in keyring...
+  -> Disabled 50 keys.
+==> Updating trust database...
+gpg: Note: third-party key signatures using the SHA1 algorithm are rejected
+gpg: (use option "--allow-weak-key-signatures" to override)
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:  10  trust: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: depth: 1  valid:  10  signed:  90  trust: 0-, 0q, 0n, 10m, 0f, 0u
+gpg: depth: 2  valid:  64  signed:  15  trust: 64-, 0q, 0n, 0m, 0f, 0u
+gpg: next trustdb check due at 2026-10-21
+
+:: Developer mode enabled
+::   See also `steamos-unminimize --dev` to recover package files pruned
+::   from the image and install development packages.
+*** pacman install waydroid packages ***
+warning: libgbinder-1.1.42-2 is up to date -- reinstalling
+warning: libglibutil-1.0.80-1 is up to date -- reinstalling
+warning: python-gbinder-1.1.2-3 is up to date -- reinstalling
+warning: waydroid-1.5.4-1 is up to date -- reinstalling
+loading packages...
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (4) libgbinder-1.1.42-2  libglibutil-1.0.80-1  python-gbinder-1.1.2-3  waydroid-1.5.4-1
+
+Total Installed Size:  1.02 MiB
+Net Upgrade Size:      0.00 MiB
+
+:: Proceed with installation? [Y/n] 
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Processing package changes...
+reinstalling libglibutil...
+reinstalling libgbinder...
+reinstalling python-gbinder...
+reinstalling waydroid...
+:: Running post-transaction hooks...
+(1/6) Reloading system manager configuration...
+(2/6) Restarting marked services...
+(3/6) Arming ConditionNeedsUpdate...
+(4/6) Reloading system bus configuration...
+(5/6) Updating icon theme caches...
+(6/6) Updating the desktop file MIME type cache...
