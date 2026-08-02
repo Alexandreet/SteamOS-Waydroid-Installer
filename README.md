@@ -8,38 +8,21 @@ A collection of tools that is packaged into an easy to use script that is stream
 
 **NOTE - this repository uses `main` and `testing` branches.**
 
-**`testing`** - this is where new updates / features are pushed and sits for 1-2 weeks to make sure that bugs are squashed and eliminated. You can access it via this command -
+**`testing`** - this is where new updates / features are pushed and sits for 1-2 weeks to make sure that bugs are squashed and eliminated. You can access it via this command (Temporary Link Until Original Repo returns) -
 ```
-git clone --depth=1 -b testing https://github.com/ryanrudolfoba/steamos-waydroid-installer
+git clone --depth=1 -b testing https://github.com/Timbo303/steamos-waydroid-installer
 ```
 
-**`main`** this is updated after 1-2 weeks in `testing` branch. You can access it via this command -
+**`main`** this is updated after 1-2 weeks in `testing` branch. You can access it via this command (Temporary Link Until Original Repo returns) -
 ```
-git clone --depth=1 https://github.com/ryanrudolfoba/steamos-waydroid-installer
+git clone --depth=1 https://github.com/Timbo303/steamos-waydroid-installer
 ```
 
 **Script has gone through several updates - this now allows you to install Android 11 / Android 13 and their TV counterparts - Android 11 TV / Android 13 TV!**
 
 | [2026 SteamOS Waydroid Android Install Guide](https://www.youtube.com/watch?v=06T-h-jPVx8) | [SteamOS Waydroid Android Upgrade Guide](https://youtu.be/CJAMwIb_oI0) |
 | ------------- | ------------- |
-| [![image](https://github.com/user-attachments/assets/514beb00-766e-4e3e-8d2b-64b13b6a6ef0)](https://youtu.be/uZz9jdPBsb4)  | [![image](https://github.com/user-attachments/assets/88bb1e93-2f80-4ed0-82f1-1cbe78e04a2f)](https://youtu.be/CJAMwIb_oI0)  |
-
 | [Android TV demo](https://youtu.be/gNFxrojouiM) | [Android 13 demo](https://youtu.be/5BZz8YynaUA) |
-| ------------- | ------------- |
-| [![image](https://github.com/user-attachments/assets/093bf362-10da-4ff6-ab3d-a3e50ea3c9f7)](https://youtu.be/gNFxrojouiM)  | [![image](https://github.com/user-attachments/assets/cdb47289-4ac6-4625-9fed-0903d624958a)](https://youtu.be/5BZz8YynaUA)  |
-
-<details>
-<summary><b>SCREENSHOTS! SCREENSHOTS! SCREENSHOTS!</b></summary>
-
-![image](https://github.com/user-attachments/assets/a9bc05cc-87ea-43f3-a628-56b0250ae88d)
-
-**Android 13**
-![image](https://github.com/user-attachments/assets/cc9d408b-b4af-4d39-8dd3-0507e15ef8a7)
-![image](https://github.com/user-attachments/assets/a3ac44b6-68bf-4a1f-bf1a-e880b320dcf0)
-
-**Android 13 TV**
-![image](https://github.com/user-attachments/assets/141c2ec6-9918-40e8-bf87-2e199fbbb3f9)
-</details>
 
 <details>
 <summary><b>How to Access the Waydroid Folder in Dolphin File Manager</b></summary>
@@ -70,30 +53,12 @@ git clone --depth=1 https://github.com/ryanrudolfoba/steamos-waydroid-installer
 > If you are going to use this script for a video tutorial, PLEASE reference on your video where you got the script! This will make the support process easier!
 > And don't forget to give a shoutout to [@10MinuteSteamDeckGamer](https://www.youtube.com/@10MinuteSteamDeckGamer/) / ryanrudolf from the Philippines!
 
-<b> If you like my work please show support by subscribing to my [YouTube channel @10MinuteSteamDeckGamer.](https://www.youtube.com/@10MinuteSteamDeckGamer/) </b> <br>
+<b> If you like my work please show support by subscribing to [YouTube channel @10MinuteSteamDeckGamer.](https://www.youtube.com/@10MinuteSteamDeckGamer/) </b> <br>
 <b> I'm just passionate about Linux, Windows, how stuff works, and playing retro and modern video games on my Steam Deck! </b>
-<p align="center">
-<a href="https://www.youtube.com/@10MinuteSteamDeckGamer/"> <img src="https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/blob/main/10minute.png"/> </a>
-</p>
-
-<b>Monetary donations are also encouraged if you find this project helpful. Your donation inspires me to continue research on the Steam Deck! Clover script, 70Hz mod, SteamOS microSD, Secure Boot, etc.</b>
-
-<b>Scan the QR code or click the image below to visit my donation page.</b>
-
-<p align="center">
-<a href="https://www.paypal.com/donate/?business=VSMP49KYGADT4&no_recurring=0&item_name=Your+donation+inspires+me+to+continue+research+on+the+Steam+Deck%21%0AClover+script%2C+70Hz+mod%2C+SteamOS+microSD%2C+Secure+Boot%2C+etc.%0A%0A&currency_code=CAD"> <img src="https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/blob/main/QRCode.png"/> </a>
-</p>
 
 # Disclaimer
 1. Do this at your own risk!
 2. This is for educational and research purposes only!
-
-# [Video Tutorial - SteamOS Android Waydroid Installer](https://youtu.be/uZz9jdPBsb4)
-[Click the image below for a video tutorial and to see the functionalities of the script!](https://youtu.be/uZz9jdPBsb4)
-</b>
-<p align="center">
-<a href="https://youtu.be/uZz9jdPBsb4"> <img src="https://github.com/user-attachments/assets/2a46ceae-2d18-4625-bf97-6c000dbc34f7" /> </a>
-</p>
 
 # What's New (as of Feb 20 2026)
 * change from Pixel 5 spoof to Pixel 10 Pro spoof
@@ -267,13 +232,13 @@ SteamOS has been stuck on 6.1.52-valve16-1 for several releases now so I think t
 	To clone the `main` branch -
    ```sh
    cd ~/
-   git clone --depth=1 https://github.com/ryanrudolfoba/steamos-waydroid-installer
+   git clone --depth=1 https://github.com/Timbo303/steamos-waydroid-installer
    ```
 
 	To clone the `testing` branch where new features / updates are being tested before it goes to `main` -
 	```sh
    cd ~/
-   git clone --depth=1 -b testing https://github.com/ryanrudolfoba/steamos-waydroid-installer
+   git clone --depth=1 -b testing https://github.com/Timbo303/steamos-waydroid-installer
    ```
 
 3. Execute the script! \
@@ -297,7 +262,7 @@ SteamOS has been stuck on 6.1.52-valve16-1 for several releases now so I think t
 <summary><b>Click here - Read the sections below carefully. These are purely OPTIONAL.</b></summary>
 
 **Steam Deck Controller Layout**
-[Thanks to DanielLester83!](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/issues/134)
+Thanks to DanielLester83!
 
 Search 'Waydroid' in the community templates or maybe this link would work steam://controllerconfig/3665077347/3304296813
 
@@ -308,23 +273,20 @@ This work around seems to be needed because steaminput does not seem to pass the
 This layout also tweaks the trackpad inputs.
 
 **Configure Android Start Menu Shortcuts to Work in Desktop Mode** \
-NOTE: This is purely optional and doesn't affect the functionality of Waydroid if you don't do the steps.\
-Personally I don't need it but for those that do then [this is what you need.](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/issues/144) Thanks to DanielLester83 for the instructions!
+Work in Progress. Thanks to DanielLester83 for the instructions!
 
 **Controller Not Being Detected** \
 The script has been updated so that the controller detection will get triggered once Android has completed the boot process. This makes the controller detection more accurate and the boot sequence to be faster.
 
-However if you use Bluetooth headphones it will interfere with controller detection. Use the workaround mentioned [here](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/issues/91#issuecomment-2497139748) and [here](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/issues/91#issuecomment-2530544096)
 </details>
 
 # I dont want this anymore! I want to uninstall!
 1. Go to Desktop Mode.
 2. There will be an icon called Waydroid Toolbox on the desktop.
 3. Launch that icon and select UNINSTALL.
-![image](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/assets/98122529/afdf9e95-7ccf-4bc8-9400-4b8332c5afe9)
 
 # Troubleshooting / Filing Bug Reports
-1. If you encounter an issue with the script, try to [uninstall](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/tree/main#i-dont-want-this-anymore-i-want-to-uninstall), clone the repo again and perform an install.\
+1. If you encounter an issue with the script, try to [uninstall](https://github.com/Timbo303/SteamOS-Waydroid-Installer/tree/main#i-dont-want-this-anymore-i-want-to-uninstall), clone the repo again and perform an install.\
 Reason for that - you might be using an older version of my script and a new version might have already fixed your issue.
 2. If uninstall / reinstall didn't help, open an issue and please be descriptive as possible. \
 At the minimum include this when filing an issue - \
@@ -332,9 +294,9 @@ SteamOS version - \
 Error message encountered - \
 Screenshot of error - \
 Do you have any scripts / tweaks that might be causing issues?
-3. Downloads are slow when acquiring the waydroid image. This is similar to this [issue](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/issues/26). \
+3. Downloads are slow when acquiring the waydroid image. \
 Answer - You might have connected to a slow sourceforge mirror. Press CTRL-C to cancel the download and re-run the script again.
-4. No shortcuts in Game Mode after running the script / Unsupported File Type when adding shortcuts. This is similar to this [issue](https://github.com/ryanrudolfoba/SteamOS-Waydroid-Installer/issues/25). \
+4. No shortcuts in Game Mode after running the script / Unsupported File Type when adding shortcuts. \
 Answer - This issue happens if Steam client cant be run because the script was called from an ssh or virtual tty session. Make sure to run the script on Desktop Mode via konsole.
 
 # A Note on SteamOS Updates
@@ -343,27 +305,7 @@ Re-run the script again but if the SteamOS update contains a new kernel version 
 Please file an issue report when this happens so I can compile a binder kernel module to match the SteamOS update.
 
 # Mini-guides for Steam Deck Android Waydroid
-These mini guides are tailor-fitted for the Steam Deck that uses the script provided in this repo.
-
-| [How to Sideload APKs](https://youtu.be/LglEbSdRc0M) | [How to Upgrade the Android Image](https://youtu.be/lfwoZZxXh7I) |
-| ------------- | ------------- |
-| [![image](https://github.com/user-attachments/assets/e50286c3-391e-4189-ac86-47428a9577d2)](https://youtu.be/LglEbSdRc0M) | [![image](https://github.com/user-attachments/assets/4fe9d79d-0ac9-4ac4-983a-ba1fc66e820c)](https://youtu.be/lfwoZZxXh7I) |
-
-| [How to Configure Fake Touchscreen](https://youtu.be/Xt2ceq8ZUJ8) | [How to Configure Fake Wi-Fi](https://youtu.be/LtMGmSSB52g) |
-| ------------- | ------------- |
-| [![image](https://github.com/user-attachments/assets/19bdadf4-2c3c-4cec-a247-715eccd91529)](https://youtu.be/Xt2ceq8ZUJ8) | [![image](https://github.com/user-attachments/assets/9f07c032-8814-448d-a782-a7ff5185b136)](https://youtu.be/LtMGmSSB52g) |
-
-| [How to Launch APKs Directly in Game Mode](https://youtu.be/pkRtPHfa_EM) | [Configure sdcard as Main Storage for Waydroid](https://youtu.be/Q4QzzjkfZeI) |
-| ------------- | ------------- |
-| [![image](https://github.com/user-attachments/assets/932154be-89a2-4c04-8587-2e6f363c5337)](https://youtu.be/pkRtPHfa_EM) | [![image](https://github.com/user-attachments/assets/a0075785-528b-4d62-8ba1-9e36483d86f7)](https://youtu.be/Q4QzzjkfZeI) |
-
-| [How to Configure Roblox](https://youtu.be/-czisFuKoTM) | [How to Access the OBB Folder / How to Root](https://youtu.be/RurH-XTTSDQ) |
-| ------------- | ------------- |
-| [![image](https://github.com/user-attachments/assets/4c188006-a0f1-44cb-8104-0c553e3eb944)](https://youtu.be/-czisFuKoTM) | [![image](https://github.com/user-attachments/assets/5e3e358f-a0f8-45fc-a92e-7348262a7d4a)](https://youtu.be/RurH-XTTSDQ) |
-
-| [How to Rotate Waydroid](https://youtu.be/OxApPDhZn9I) |
-| ------------- |
-| [![image](https://github.com/user-attachments/assets/87d2f8bc-0ea7-4a11-8e57-76bac5237aff)](https://youtu.be/OxApPDhZn9I) |
+These mini guides are tailor-fitted for the Steam Deck that uses the script provided in this repo. WIP
 
 # Games Tested By Me on Android Waydroid Steam Deck
 [Geekbench Benchmark Result Between Steam Deck OLED and Steam Deck LCD on SteamOS Android Waydroid](https://youtu.be/56YGZsU5j74) - Feb 11 2024 \
